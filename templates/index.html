@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload to Drime</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    input[type="text"] { width: 100%; padding: 10px; margin: 1rem 0; }
+    button { padding: 10px 20px; }
+    .flash { padding: 1em; margin-bottom: 1em; border: 1px solid red; color: red; }
+    .success { padding: 1em; background: #e0ffe0; border: 1px solid #6c6; }
+  </style>
+</head>
+<body>
+  <h2>Upload File from URL to Drime</h2>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+
+  <form method="POST">
+    <input type="text" name="cdn_url" placeholder="Enter file URL..." required>
+    <button type="submit">Upload to Drime</button>
+  </form>
+
+  {% if success %}
+    <div class="success">
+      ✅ File uploaded!<br>
+      <strong>Link:</strong> <a href="{{ link }}" target="_blank">{{ link }}</a>
+    </div>
+  {% endif %}
+</body>
+</html>
